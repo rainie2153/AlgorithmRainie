@@ -1,5 +1,7 @@
 package Important;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -7,13 +9,15 @@ import java.util.Stack;
  */
 public class MaximumRectangle {
     public int maximalRectangle(char[][] matrix) {
-        if (matrix.length == 0 || matrix[0].length == 0) return 0;
-        int rows = matrix.length, cols = matrix[0].length;
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
         int[] array = new int[cols];
         int maxRec = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                int check = matrix[i][j];
                 array[j] = matrix[i][j] == 0 ? 0 : 1 + array[j];
             }
             maxRec = Math.max(maxRec, largestRectangleArea(array));
@@ -21,29 +25,32 @@ public class MaximumRectangle {
         return maxRec;
     }
 
-
-    private int largestRectangleArea(int[] heights) {
-        Stack<Integer> stack = new Stack<>();
+    public int largestRectangleArea(int[] height) {
+        int len = height.length;
+        Deque<Integer> s = new LinkedList<>();
         int maxArea = 0;
-
-        for (int i = 0; i <= heights.length; i++) {
-            int cur = i == heights.length ? 0 : heights[i];
-            while (!stack.isEmpty() && heights[stack.peek()] >= cur) {
-                int higher = heights[stack.pop()];
-                int left = stack.isEmpty() ? 0 : stack.peek() + 1;
-                maxArea = Math.max(maxArea, higher * (i - left));
+        for(int i = 0; i <= len; i++){
+            int h = (i == len ? 0 : height[i]);
+            if(s.isEmpty() || h >= height[s.peek()]){
+                s.push(i);//保持stack是生序排列高度对应的index
+            }else{
+                int top = s.pop();//栈顶每次遇到矮子就pop出来计算下最大直方图面积
+                maxArea = Math.max(maxArea, height[top] * (s.isEmpty() ? i : i - 1 - s.peek()));
+                i--;
             }
-            stack.push(i);
         }
         return maxArea;
     }
+
     public static void main(String[] args) {
         MaximumRectangle test = new MaximumRectangle();
         char[][] input = {  {1, 0, 1, 0, 0},
+                            {1, 0, 1, 1, 1},
                             {1, 1, 1, 1, 1},
-                            {0, 1, 1, 1, 1},
-                            {1, 0, 1, 1, 1}};
+                            {1, 0, 0, 1, 0}};
         System.out.print(test.maximalRectangle(input));
+        //int[] height = {1,19,20,18,2};
+        //System.out.print(test.largestRectangleArea(height));
 
     }
 }

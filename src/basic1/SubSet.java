@@ -23,12 +23,12 @@ public class SubSet {
         return result;
     }
 
-    private void helper(char[] set, StringBuilder sb1, int index, List<String> result) {
-        result.add(sb1.toString());
+    private void helper(char[] set, StringBuilder sb, int index, List<String> result) {
+        result.add(sb.toString());
         for (int i = index; i < set.length; i++) {
-            sb1.append(set[i]);
-            helper(set, sb1, i + 1, result);
-            sb1.deleteCharAt(sb1.length() - 1);
+            sb.append(set[i]);
+            helper(set, sb, i + 1, result);
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 
@@ -36,8 +36,6 @@ public class SubSet {
         SubSet test = new SubSet();
         String s = "abc";
         test.subset(s);
-
-
     }
 
 }

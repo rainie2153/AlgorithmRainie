@@ -35,7 +35,7 @@ public class DecodeWays {
     }
     public static void main(String args[]) {
         DecodeWays test = new DecodeWays();
-        System.out.print(test.decodeWays("262626"));
+        System.out.print(test.decodeWays("27"));
     }
 
 

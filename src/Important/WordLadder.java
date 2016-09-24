@@ -13,7 +13,7 @@ import java.util.Set;
  * 2.Each intermediate word must exist in word list
  *
  * start:"hit"
- * end: cog"
+ * end: "cog"
  * Since only one letter can be changed at a time, if we start from hit, we can only change to those words which have only one
  * different letter from it. like hot, put in graph-theoretic terms,hot is a neighbor of hit
  *
