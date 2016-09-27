@@ -42,35 +42,35 @@ public class FindSubArrWithGivenSum {
  * The idea is to iterate through the arr and for each element arr[i] caculate sum of elements from 0 to
  * i this can be done as sum += arr[i], if target - curSum has been seen before, then there is
  */
-    public int findSubArrSumHash(int[] arr, int target) {
-        int[] sum = new int[arr.length];
-        Map<Integer, Integer> map = new HashMap<>();//key存目前的sum,value存对应截止到哪个index
-//        //先build map
-//        for (int i = 0; i < arr.length; i++) {
-//            sum[i] += arr[i];
-//            if (!map.containsKey(sum[i])) {
-//                map.put(sum[i],i);
-//            }
-//        }
-        sum[0] = arr[0];
-        map.put(sum[0], 0);
-        for (int j = 1; j < arr.length; j++) {
-            sum[j] = sum[j - 1] + arr[j];
-            map.put(sum[j], j);
-            if (map.containsKey(sum[j] - target)) {
-                int i = map.get(sum[j] - target) + 1;
-                System.out.println(i);
-                System.out.println(j);
+
+    public boolean findSubArrSumHash(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        int[] presum = new int[nums.length + 1];
+        presum[0] = 0;//0 1 0 5 3 6
+        for (int i = 0; i < nums.length; i++) {
+            presum[i+1] = presum[i] + nums[i];
+        }
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();//recorde the num and its index
+        int max = 0;
+        for (int i = 0; i < presum.length; i++) {
+            if (map.containsKey(presum[i] - k)) {
+                return true;
+            }
+            if (!map.containsKey(presum[i])) {
+                map.put(presum[i], i);
             }
         }
-        return 0;
+        return false;
     }
+
 
     public static void main(String[] args) {
         FindSubArrWithGivenSum test = new FindSubArrWithGivenSum();
         int arr[] = {15, 2, 4, 8, 9, 5, 10, 23};
-        int sum = 23;
-        test.findSubArrSumHash(arr, sum);
+        int sum = 1700;
+        System.out.print(test.findSubArrSumHash(arr, sum));
     }
 
 }

@@ -53,7 +53,7 @@ public class Trie {
         return temp != null && temp.isLeaf;
     }
 
-    private TrieNode searchNode(String word) {
+    private TrieNode searchNode(String word) {//search last node of a word
         Map<Character, TrieNode> children = root.children;
         TrieNode temp = null;
         for (int i = 0; i < word.length(); i++) {

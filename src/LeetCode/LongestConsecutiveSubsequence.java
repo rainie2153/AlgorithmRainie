@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.HashMap;
+
 /**
  * Created by yuliu on 9/5/16.
  */

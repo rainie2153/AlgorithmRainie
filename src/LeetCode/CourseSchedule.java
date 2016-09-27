@@ -7,10 +7,13 @@ import java.util.Set;
 
 /**
  * Created by yuliu on 7/26/16.
+ * DFS
  */
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        if (numCourses <= 1) return true;
+        if (numCourses <= 1) {
+            return true;
+        }
         List<List<Integer>> graph = new ArrayList<List<Integer>>(numCourses);
 
         buildGraph(graph, numCourses, prerequisites);
@@ -19,7 +22,9 @@ public class CourseSchedule {
         Set<Integer> visiting = new HashSet<Integer>();
 
         for (int i = 0; i < numCourses; i++) {
-            if (!dfs(i, graph, visited, visiting)) return false;
+            if (!dfs(i, graph, visited, visiting)) {
+                return false;
+            }
         }
         return true;
 
@@ -56,7 +61,9 @@ public class CourseSchedule {
         visiting.add(i);
         List<Integer> neighbours = graph.get(i);
         for (Integer neighbour : neighbours) {
-            if (!dfs(neighbour, graph, visited, visiting)) return false;
+            if (!dfs(neighbour, graph, visited, visiting)) {
+                return false;
+            }
         }
 
         visited.add(i);

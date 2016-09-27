@@ -6,7 +6,8 @@ import java.util.HashMap;
 /**
  * Created by yuliu on 9/23/16.
  */
-public class CourseScheduleBFS {
+public class
+CourseScheduleBFS {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (numCourses <= 1) {
             return true;
@@ -40,8 +41,8 @@ public class CourseScheduleBFS {
         while (!q.isEmpty()) {
             int key = q.poll();
             for (Map.Entry<Integer, Set<Integer>> entry : graph.entrySet()) {
-                if (entry.getValue().contains(new Integer(key))) {
-                    entry.getValue().remove(new Integer(key));
+                if (entry.getValue().contains(key)) {
+                    entry.getValue().remove(key);
                     if (entry.getValue().size() == 0) {
                         q.offer(entry.getKey());
                         coursesLeft--;
@@ -53,7 +54,7 @@ public class CourseScheduleBFS {
     }
     public static void main(String args[]) {
         CourseScheduleBFS test = new CourseScheduleBFS();
-        int[][] input = {{0,1},{0,2},{2,0}};
+        int[][] input = {{0,1},{0,2},{1,2}};
         System.out.print(test.canFinish(3, input));
     }
 

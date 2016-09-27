@@ -36,10 +36,10 @@ For (n-1)th target, the probability of returning it is (n-1)/n * 1/(n-1)= 1/n.
     }
 
     public static void main(String args[]) {
-        int[] nums = {1,2,3,3,3};
+        int[] nums = {1,2,3,30,300};
         RandomIndexPick test = new RandomIndexPick(nums);
-        System.out.println(test.pick(3));//should return either index 2,3 or 4 randomly.Each index概率相等
-        System.out.println(test.pick(1));//should return 0 since in the array only nums[0] is equal to 1
+        System.out.println(test.pick(300));//should return either index 2,3 or 4 randomly.Each index概率相等
+        //System.out.println(test.pick(30));//should return 0 since in the array only nums[0] is equal to 1
 
     }
 
